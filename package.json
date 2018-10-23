@@ -1,0 +1,30 @@
+{
+  "name": "functional-lenses",
+  "version": "1.0.0",
+  "description": "Slides for my Lambda World Cádiz 2018 talk 𝝺🌍",
+  "main": "deck.mdx",
+  "scripts": {
+    "start": "mdx-deck deck.mdx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kutyel/functional-lenses.git"
+  },
+  "keywords": [
+    "lambda-world",
+    "ramda",
+    "lenses",
+    "functional-lenses",
+    "fp",
+    "kmett-style"
+  ],
+  "author": "kutyel <flaviocorpa@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kutyel/functional-lenses/issues"
+  },
+  "homepage": "https://github.com/kutyel/functional-lenses#readme",
+  "devDependencies": {
+    "mdx-deck": "^1.7.7"
+  }
+}
