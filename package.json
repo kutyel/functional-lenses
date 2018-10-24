@@ -4,7 +4,8 @@
   "description": "Slides for my Lambda World Cádiz 2018 talk 𝝺🌍",
   "main": "deck.mdx",
   "scripts": {
-    "start": "mdx-deck deck.mdx"
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx --no-html"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/kutyel/functional-lenses#readme",
   "devDependencies": {
-    "mdx-deck": "^1.7.7"
+    "mdx-deck": "^1.7.7",
+    "mdx-deck-code-surfer": "^0.5.3"
   }
 }

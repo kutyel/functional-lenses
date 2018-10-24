@@ -1,7 +1,20 @@
-export { dark as theme } from 'mdx-deck/themes'
+import { dark } from 'mdx-deck/themes'
+import codeSurfer from "prism-react-renderer/themes/nightOwl"
+export { components } from "mdx-deck-code-surfer"
+export const theme = { ...dark, codeSurfer }
 
 # Functional Lenses in JavaScript
 
 ---
 
-WOW!
+```js curry 🍛
+const curry = (f, arity = f.length, ...args) =>
+  arity <= args.length
+    ? f(...args)
+    : (...argz) => curry(f, arity, ...args, ...argz)
+----
+* > The Ultimate Curry Implementation 🤓
+1, 3 > Some lines
+1:4, 6, 8:10 > Also ranges
+2, 4[1:6], 5[2, 4, 6:9] > Some tokens
+```
