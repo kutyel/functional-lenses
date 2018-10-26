@@ -45,7 +45,11 @@ Let's begin! 🚀
 
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eetWam3nhoM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<Image src='https://res-3.cloudinary.com/revolttv/image/upload/w_800/c_crop,f_auto,fl_lossy.force_strip,q_auto:best,h_450,w_800,x_0,y_0/eda26h7gxnsjmxwhhwm5.jpg' />
+
+---
+
+<iframe width="1024" height="600" src="https://www.youtube.com/embed/eetWam3nhoM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ---
 
@@ -57,18 +61,73 @@ But first, we need our own _curry_ function! 🍛
 
 ---
 
-```js The Ultimate Curry Implementation 🍛
+```js Curry 🍛
 const curry = (f, arity = f.length, ...args) =>
   arity <= args.length
     ? f(...args)
     : (...argz) => curry(f, arity, ...args, ...argz)
 ----
-* > the code...
+* > The Ultimate Curry Implementation
 1[9:13] > Here's all the magic ✨
 2
 3
 4
 ```
+
+---
+
+Now, let's write our own lightweight implementation!
+
+---
+
+```js lenses.js
+// prop :: s -> {s: a} -> a?
+export const prop = curry((key, obj) => obj[key])
+
+// assoc :: String -> a -> {k: v} -> {k: v}
+export const assoc = curry((key, val, obj) => ({ ...obj, [key]: val }))
+
+// lens :: (s → a) → ((a, s) → s) → Lens s a
+export const lens = curry((get, set) => ({ get, set }))
+
+// view :: Lens s a → s → a
+export const view = curry((lens, obj) => lens.get(obj))
+
+// set :: Lens s a → a → s → s
+export const set = curry((lens, val, obj) => lens.set(val, obj))
+
+// over :: Lens s a → (a → a) → s → s
+export const over = curry((lens, f, obj) => lens.set(f(lens.get(obj)), obj))
+
+// lensProp :: String → Lens s a
+export const lensProp = key => lens(prop(key), assoc(key))
+
+// lensIndex :: Number → Lens s a
+export const lensIndex = index => lens(prop(index), assoc(index))
+----
+* > Let's build our own lenses!
+1,2
+4,5
+7,8 > Now the "functional getters and setters" part makes sense! 👏
+10,11
+13,14
+16,17
+17[12, 22:23, 30] > Notice it receives a function `f`
+19,20
+22,23
+````
+
+---
+
+Let's try them out! ⚙️
+
+---
+
+test.js
+
+---
+
+# They WORK! 🎉🎉🎉
 
 ---
 
@@ -159,8 +218,29 @@ const services = {
 console.assert(view(sshServiceEnabledLens, services) === true)
 console.assert(view(telnetServiceEnabledLens, services) === false)
 ----
-* > Composing lenses (left->right)
+* > Composing lenses
+1:4 > First lense
+6:20 > Composed lenses (or *combined*)
+11:14 > Lenses compose left->right
+22:32 > Usage
+13, 19 > Notice reused `enabledLens` in the compositions!
 ```
+
+---
+
+Please, don't use this lenses in production! 🕶️️⚠️
+
+---
+
+Use **Ramda**! 🐏
+
+---
+
+Or, if you are a _TypeScript_ fan, **monocle-ts**
+
+---
+
+<Image src='images/fantasyland.png' />
 
 ---
 
