@@ -1,7 +1,19 @@
+import { Image } from 'mdx-deck'
+import { H1, H2, P, BImage } from './components'
 export { components } from 'mdx-deck-code-surfer'
 export { default as theme } from './components/theme'
 
-# Functional Lenses in JavaScript
+<H1>Functional Lenses in JavaScript</H1>
+
+<H2>Lambda World Cádiz 2018</H2>
+
+<P>@FlavioCorpa</P>
+
+<BImage src='images/lense.jpeg' />
+
+---
+
+<Image src='images/lambda.jpg' />
 
 ---
 
@@ -9,14 +21,151 @@ export { default as theme } from './components/theme'
 
 ---
 
-```js curry 🍛
+<Image src='images/egghead.png' />
+
+---
+
+<Image src='images/reason.png' />
+
+---
+
+Let's begin! 🚀
+
+---
+
+**Lenses** are basically functional _getters_ and _setters_
+
+---
+
+...but first...
+
+---
+
+# JavaScript!?!?!?
+
+---
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eetWam3nhoM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+---
+
+Now we can proceed 🤓
+
+---
+
+But first, we need our own _curry_ function! 🍛
+
+---
+
+```js The Ultimate Curry Implementation 🍛
 const curry = (f, arity = f.length, ...args) =>
   arity <= args.length
     ? f(...args)
     : (...argz) => curry(f, arity, ...args, ...argz)
 ----
-* > The Ultimate Curry Implementation 🤓
-1, 3 > Some lines
-1:4, 6, 8:10 > Also ranges
-2, 4[1:6], 5[2, 4, 6:9] > Some tokens
+* > the code...
+1[9:13] > Here's all the magic ✨
+2
+3
+4
 ```
+
+---
+
+<Image src='https://media.giphy.com/media/XyLwEmBGqxkti/giphy.gif' />
+
+---
+
+```js Usage
+const obj = {
+  people: {
+    me: {
+      friends: [
+        { name: 'Kike', brother: true },
+        { name: 'Samuel' },
+        { name: 'José' },
+        { name: 'Josué' },
+      ],
+      habilities: [],
+    },
+  },
+}
+
+const bf = lensPath(['people', 'me', 'friends', 0, 'name'])
+
+view(bf, obj) // > Kike
+set(bf, 'Mike', obj) // > Object(...[{name:'Mike'}])
+----
+* > Let's have a look!
+1:13 > Image you have this some-what complex object...
+15 > Here is where lenses shine! ✨
+17 > Now I can view my bestie...
+18 > Or even change it if I feel like it! 💁🏼‍♀️
+```
+
+---
+
+...specific lenses for very specific use-cases??? 🤔
+
+---
+
+Lenses are **composable** 🚀
+
+---
+
+Wait... can we compose in JavaScript!? 😱
+
+---
+
+```js
+const compose = (...fns) => args => fns.reduceRight((x, f) => f(x), args)
+----
+* > Self explanatory...
+```
+
+---
+
+```js
+/**
+ * Generic lenses
+ */
+const enabledLens = lensPath(['enabled'])
+
+/**
+ * Combined lenses
+ */
+
+const sshServiceLens = lensPath(['sshService'])
+const sshServiceEnabledLens = compose(
+  sshServiceLens,
+  enabledLens
+)
+
+const telnetServiceLens = lensPath(['telntService'])
+const telnetServiceEnabledLens = compose(
+  telnetServiceLens,
+  enabledLens
+)
+
+/**
+ * Usage
+ */
+
+const services = {
+  sshService: { enabled: true },
+  telnetService: { enabled: false },
+}
+
+console.assert(view(sshServiceEnabledLens, services) === true)
+console.assert(view(telnetServiceEnabledLens, services) === false)
+----
+* > Composing lenses (left->right)
+```
+
+---
+
+# Thanks! ☺️
+
+---
+
+<Image src='images/ending.png' />

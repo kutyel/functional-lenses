@@ -61,3 +61,6 @@ package-lock.json
 # next.js build output
 .next
 dist
+
+# other
+.DS_Store
