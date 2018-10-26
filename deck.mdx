@@ -123,7 +123,51 @@ Let's try them out! ⚙️
 
 ---
 
-test.js
+```js test.js
+import { assoc, prop, lensProp, view, over, set } from './lenses'
+
+const user = { id: 1, name: 'foo' }
+
+const propName = prop('name')(user)
+
+const assocName = assoc('name')('bar')(user)
+
+const toUpper = str => str.toUpperCase()
+
+const cubed = num => num ** 3
+
+const idLens = lensProp('id')
+
+const viewId = view(idLens, user) // > 1
+
+const setId = set(idLens, 2, user) // > { id: 2, name: "foo" }
+
+const cubedId = over(idLens, cubed, setId) // > { id: 8, name: "foo" }
+
+const nameLense = lensProp('name')
+
+const getName = view(nameLense, user) // > "foo"
+
+const setName = set(nameLense, 'flavio', user) // > { id: 1, name: "flavio" }
+
+const capName = over(nameLense, toUpper, setName) // > { id: 1, name: "FLAVIO" }
+----
+* > Does this work???
+1 > ESModules!
+3
+5
+7 > This can also be: `assoc('name', 'bar', user)` (closures FTW)
+9
+11 > Exponentiation operator! (ES2016)
+13
+15
+17
+19
+21
+23
+25
+27
+```
 
 ---
 
