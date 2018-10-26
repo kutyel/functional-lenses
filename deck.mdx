@@ -1,7 +1,7 @@
 import { Image } from 'mdx-deck'
-import { H1, H2, P, BImage } from './components'
+import { H1, H2, P, BImage, theme } from './components'
+export { theme } from './components'
 export { components } from 'mdx-deck-code-surfer'
-export { default as theme } from './components/theme'
 
 <H1>Functional Lenses in JavaScript</H1>
 
@@ -9,11 +9,11 @@ export { default as theme } from './components/theme'
 
 <P>@FlavioCorpa</P>
 
-<BImage src='images/lense.jpeg' />
+<BImage src={require("file-loader!./images/lense.jpeg")} />
 
 ---
 
-<Image src='images/lambda.jpg' />
+<Image src={require('file-loader!./images/lambda.jpg')} />
 
 ---
 
@@ -21,11 +21,11 @@ export { default as theme } from './components/theme'
 
 ---
 
-<Image src='images/egghead.png' />
+<Image src={require('file-loader!./images/egghead.png')} />
 
 ---
 
-<Image src='images/reason.png' />
+<Image src={require('file-loader!./images/reason.png')} />
 
 ---
 
@@ -284,7 +284,7 @@ Or, if you are a _TypeScript_ fan, **monocle-ts**
 
 ---
 
-<Image src='images/fantasyland.png' />
+<Image src={require('file-loader!./images/fantasyland.png')} />
 
 ---
 
@@ -292,4 +292,4 @@ Or, if you are a _TypeScript_ fan, **monocle-ts**
 
 ---
 
-<Image src='images/ending.png' />
+<Image src={require('file-loader!./images/ending.png')} />
